@@ -702,6 +702,11 @@ section {
   margin-bottom: 2rem;
 }
 
+.rsvp-hint {
+  margin-top: 1.75rem;
+  margin-bottom: 0;
+}
+
 .rsvp-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -743,6 +748,16 @@ section {
   color: var(--accent);
 }
 
+.btn-selected {
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.btn-maybe.btn-selected {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(232, 160, 180, 0.08);
+}
+
 .rsvp-result {
   margin-top: 2rem;
   font-family: var(--font-display);
@@ -781,41 +796,44 @@ section {
 
 /* Easter egg — Boba */
 .easter {
-  padding: 0 0 2rem;
   display: flex;
   justify-content: center;
+  padding: 0 1.5rem 1.5rem;
+  margin-top: -2rem;
 }
 
 .easter-trigger {
   display: flex;
-  gap: 6px;
-  padding: 0.75rem 1rem;
+  gap: 7px;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
   background: none;
   border: none;
   cursor: pointer;
-  opacity: 0.35;
+  opacity: 0.55;
   transition: opacity var(--transition), transform var(--transition);
 }
 
 .easter-trigger:hover {
-  opacity: 0.75;
-  transform: scale(1.05);
+  opacity: 1;
+  transform: scale(1.08);
 }
 
 .easter-dot {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--text-muted);
-  animation: easter-pulse 2s ease-in-out infinite;
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(232, 160, 180, 0.4);
+  animation: easter-pulse 2.2s ease-in-out infinite;
 }
 
-.easter-dot:nth-child(2) { animation-delay: 0.2s; }
-.easter-dot:nth-child(3) { animation-delay: 0.4s; }
+.easter-dot:nth-child(2) { animation-delay: 0.25s; }
+.easter-dot:nth-child(3) { animation-delay: 0.5s; }
 
 @keyframes easter-pulse {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
 }
 
 .easter-modal {
@@ -828,8 +846,8 @@ section {
   padding: 1.5rem;
 }
 
-.easter-modal.hidden {
-  display: none;
+.easter-modal[hidden] {
+  display: none !important;
 }
 
 .easter-modal-backdrop {

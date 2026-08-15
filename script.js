@@ -92,90 +92,73 @@ envelope.addEventListener('click', () => {
   }, 500);
 });
 
-// ── Nature sounds (Web Audio API) ──
+// ── Background music ──
 const soundToggle = document.getElementById('soundToggle');
-let audioCtx = null;
-let soundNodes = [];
-let soundActive = false;
+const bgMusic = document.getElementById('bgMusic');
+let musicPlaying = false;
 
-function createNatureSound() {
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+bgMusic.volume = 0.55;
 
-  const master = audioCtx.createGain();
-  master.gain.value = 0.18;
-  master.connect(audioCtx.destination);
-
-  // Fire crackle — filtered noise bursts
-  const bufferSize = audioCtx.sampleRate * 2;
-  const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-  const data = noiseBuffer.getChannelData(0);
-  for (let i = 0; i < bufferSize; i++) {
-    data[i] = Math.random() * 2 - 1;
-  }
-
-  function crackle() {
-    if (!soundActive) return;
-    const source = audioCtx.createBufferSource();
-    source.buffer = noiseBuffer;
-    const filter = audioCtx.createBiquadFilter();
-    filter.type = 'bandpass';
-    filter.frequency.value = 400 + Math.random() * 600;
-    filter.Q.value = 0.5;
-    const gain = audioCtx.createGain();
-    gain.gain.setValueAtTime(0, audioCtx.currentTime);
-    gain.gain.linearRampToValueAtTime(0.08 + Math.random() * 0.06, audioCtx.currentTime + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15 + Math.random() * 0.2);
-    source.connect(filter);
-    filter.connect(gain);
-    gain.connect(master);
-    source.start();
-    source.stop(audioCtx.currentTime + 0.5);
-    setTimeout(crackle, 80 + Math.random() * 200);
-  }
-
-  // Soft forest hum
-  const hum = audioCtx.createOscillator();
-  hum.type = 'sine';
-  hum.frequency.value = 110;
-  const humGain = audioCtx.createGain();
-  humGain.gain.value = 0.03;
-  hum.connect(humGain);
-  humGain.connect(master);
-  hum.start();
-
-  // Occasional bird chirp
-  function chirp() {
-    if (!soundActive) return;
-    const osc = audioCtx.createOscillator();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(1800 + Math.random() * 800, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
-    const g = audioCtx.createGain();
-    g.gain.setValueAtTime(0, audioCtx.currentTime);
-    g.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
-    osc.connect(g);
-    g.connect(master);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.2);
-    setTimeout(chirp, 2000 + Math.random() * 4000);
-  }
-
-  soundNodes = [hum];
-  crackle();
-  chirp();
+function updateSoundUI(on) {
+  soundToggle.classList.toggle('active', on);
+  soundToggle.querySelector('.icon-off').classList.toggle('hidden', on);
+  soundToggle.querySelector('.icon-on').classList.toggle('hidden', !on);
+  soundToggle.setAttribute('aria-label', on ? 'Музыка вкл' : 'Музыка выкл');
 }
 
-function toggleSound() {
-  soundActive = !soundActive;
-  soundToggle.classList.toggle('active', soundActive);
-  soundToggle.querySelector('.icon-off').classList.toggle('hidden', soundActive);
-  soundToggle.querySelector('.icon-on').classList.toggle('hidden', !soundActive);
-  soundToggle.setAttribute('aria-label', soundActive ? 'Звуки природы вкл' : 'Звуки природы выкл');
+function waitForMusicReady() {
+  if (bgMusic.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+    return Promise.resolve();
+  }
+  return new Promise((resolve, reject) => {
+    const onReady = () => {
+      cleanup();
+      resolve();
+    };
+    const onError = () => {
+      cleanup();
+      reject(new Error('audio load failed'));
+    };
+    const cleanup = () => {
+      bgMusic.removeEventListener('canplaythrough', onReady);
+      bgMusic.removeEventListener('error', onError);
+    };
+    bgMusic.addEventListener('canplaythrough', onReady, { once: true });
+    bgMusic.addEventListener('error', onError, { once: true });
+    bgMusic.load();
+  });
+}
 
-  if (soundActive) {
-    if (!audioCtx) createNatureSound();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
+// если loop не сработал — начинаем сначала
+bgMusic.addEventListener('ended', () => {
+  if (!musicPlaying) return;
+  bgMusic.currentTime = 0;
+  bgMusic.play().catch(() => {});
+});
+
+// после паузы вкладки — продолжить, если музыка была включена
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && musicPlaying && bgMusic.paused) {
+    bgMusic.play().catch(() => {});
+  }
+});
+
+async function toggleSound() {
+  if (musicPlaying) {
+    bgMusic.pause();
+    musicPlaying = false;
+    updateSoundUI(false);
+    return;
+  }
+
+  try {
+    await waitForMusicReady();
+    await bgMusic.play();
+    musicPlaying = true;
+    updateSoundUI(true);
+  } catch {
+    musicPlaying = false;
+    updateSoundUI(false);
   }
 }
 
@@ -208,23 +191,21 @@ function burstConfetti(x, y) {
   }
 }
 
-function showResult(text) {
+function showResult(text, choice) {
   rsvpResult.textContent = text;
   rsvpResult.classList.remove('hidden');
-  btnYes.disabled = true;
-  btnMaybe.disabled = true;
-  btnYes.style.opacity = '0.4';
-  btnMaybe.style.opacity = '0.4';
+  btnYes.classList.toggle('btn-selected', choice === 'yes');
+  btnMaybe.classList.toggle('btn-selected', choice === 'maybe');
 }
 
 btnYes.addEventListener('click', (e) => {
   const rect = e.currentTarget.getBoundingClientRect();
   burstConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
-  showResult('Отлично! Как только будут даты — сообщу ♥');
+  showResult('Отлично! Как только будут даты — сообщу ♥', 'yes');
 });
 
 btnMaybe.addEventListener('click', () => {
-  showResult('Ладно... Хотя стоп, что нахуй?');
+  showResult('Ладно... Хотя стоп, что нахуй?', 'maybe');
 });
 
 // ── Easter egg: Boba ──
@@ -232,14 +213,20 @@ const easterTrigger = document.getElementById('easterTrigger');
 const easterModal = document.getElementById('easterModal');
 const easterClose = document.getElementById('easterClose');
 const easterBackdrop = document.getElementById('easterBackdrop');
+const easterImg = document.getElementById('easterImg');
+let bobaLoaded = false;
 
 function openEaster() {
-  easterModal.classList.remove('hidden');
+  if (!bobaLoaded) {
+    easterImg.src = 'boba.png';
+    bobaLoaded = true;
+  }
+  easterModal.hidden = false;
   document.body.style.overflow = 'hidden';
 }
 
 function closeEaster() {
-  easterModal.classList.add('hidden');
+  easterModal.hidden = true;
   document.body.style.overflow = '';
 }
 
@@ -248,7 +235,7 @@ easterClose.addEventListener('click', closeEaster);
 easterBackdrop.addEventListener('click', closeEaster);
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !easterModal.classList.contains('hidden')) {
+  if (e.key === 'Escape' && !easterModal.hidden) {
     closeEaster();
   }
 });

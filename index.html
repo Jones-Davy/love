@@ -13,16 +13,17 @@
   <meta property="og:title" content="Два дня в глэмпинге">
   <meta property="og:description" content="Сентябрь, природа, костёр — хочу предложить тебе отдых на два дня.">
   <meta property="og:url" content="https://jones-davy.github.io/love/">
-  <meta property="og:image" content="https://jones-davy.github.io/love/og-image.png">
-  <meta property="og:image:width" content="683">
-  <meta property="og:image:height" content="1024">
+  <meta property="og:image" content="https://jones-davy.github.io/love/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Setting the mood">
 
   <!-- Twitter / Telegram -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Два дня в глэмпинге">
   <meta name="twitter:description" content="Сентябрь, природа, костёр — хочу предложить тебе отдых на два дня.">
-  <meta name="twitter:image" content="https://jones-davy.github.io/love/og-image.png">
+  <meta name="twitter:image" content="https://jones-davy.github.io/love/og-image.jpg">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +37,7 @@
   <div class="bg-grain" aria-hidden="true"></div>
   <div class="fireflies" id="fireflies" aria-hidden="true"></div>
 
-  <button class="sound-toggle" id="soundToggle" type="button" aria-label="Звуки природы выкл" title="Звуки природы">
+  <button class="sound-toggle" id="soundToggle" type="button" aria-label="Музыка выкл" title="Lana Del Rey — Art Deco">
     <svg class="icon-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
       <path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
     </svg>
@@ -44,6 +45,8 @@
       <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
     </svg>
   </button>
+
+  <audio id="bgMusic" src="art-deco.mp3" loop preload="auto"></audio>
 
   <main>
     <section class="hero" id="hero">
@@ -236,6 +239,7 @@
         <h2>Едешь со мной?</h2>
         <p class="rsvp-sub">Даты скоро, а место уже выбрано</p>
 
+
         <div class="rsvp-buttons">
           <button class="btn btn-yes" id="btnYes" type="button">
             <span>Конечно, еду!</span>
@@ -246,23 +250,26 @@
         </div>
 
         <div class="rsvp-result hidden" id="rsvpResult" role="status" aria-live="polite"></div>
+        <p class="rsvp-sub rsvp-hint">Кстати, найди на сайте пасхалку</p>
+
       </div>
+      
     </section>
 
-    <section class="easter" id="easter">
-      <button class="easter-trigger reveal" id="easterTrigger" type="button" aria-label="???">
+    <div class="easter" id="easter">
+      <button class="easter-trigger" id="easterTrigger" type="button" aria-label="???">
         <span class="easter-dot"></span>
         <span class="easter-dot"></span>
         <span class="easter-dot"></span>
       </button>
-    </section>
+    </div>
   </main>
 
-  <div class="easter-modal hidden" id="easterModal" role="dialog" aria-modal="true" aria-labelledby="easterTitle">
+  <div class="easter-modal" id="easterModal" role="dialog" aria-modal="true" aria-labelledby="easterTitle" hidden>
     <div class="easter-modal-backdrop" id="easterBackdrop"></div>
     <div class="easter-modal-card">
       <button class="easter-modal-close" id="easterClose" type="button" aria-label="Закрыть">×</button>
-      <img class="easter-img" src="boba.png" alt="Боба" width="600" height="800" loading="lazy">
+      <img class="easter-img" id="easterImg" alt="Боба" width="600" height="800">
       <p class="easter-caption" id="easterTitle">внезапный боба</p>
     </div>
   </div>
