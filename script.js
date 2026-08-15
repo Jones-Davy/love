@@ -221,12 +221,14 @@ function openEaster() {
     easterImg.src = 'boba.png';
     bobaLoaded = true;
   }
-  easterModal.hidden = false;
+  easterModal.classList.add('is-open');
+  easterModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 }
 
 function closeEaster() {
-  easterModal.hidden = true;
+  easterModal.classList.remove('is-open');
+  easterModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
 }
 
@@ -235,7 +237,9 @@ easterClose.addEventListener('click', closeEaster);
 easterBackdrop.addEventListener('click', closeEaster);
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !easterModal.hidden) {
+  if (e.key === 'Escape' && easterModal.classList.contains('is-open')) {
     closeEaster();
   }
 });
+
+closeEaster();

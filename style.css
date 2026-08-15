@@ -703,8 +703,13 @@ section {
 }
 
 .rsvp-hint {
-  margin-top: 1.75rem;
+  margin-top: 2.5rem;
+  padding-top: 0.25rem;
   margin-bottom: 0;
+  color: var(--text-muted);
+  font-weight: 300;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .rsvp-buttons {
@@ -840,14 +845,14 @@ section {
   position: fixed;
   inset: 0;
   z-index: 10000;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
 }
 
-.easter-modal[hidden] {
-  display: none !important;
+.easter-modal.is-open {
+  display: flex;
 }
 
 .easter-modal-backdrop {
