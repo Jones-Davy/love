@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Глэмпинг — приглашение</title>
+  <meta name="description" content="Два дня в глэмпинге — только для тебя">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-city" id="bgCity" aria-hidden="true"></div>
+  <div class="bg-gradient" id="bgForest" aria-hidden="true"></div>
+  <div class="bg-grain" aria-hidden="true"></div>
+  <div class="fireflies" id="fireflies" aria-hidden="true"></div>
+
+  <button class="sound-toggle" id="soundToggle" type="button" aria-label="Звуки природы выкл" title="Звуки природы">
+    <svg class="icon-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+    </svg>
+    <svg class="icon-on hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
+    </svg>
+  </button>
+
+  <main>
+    <section class="hero" id="hero">
+      <p class="eyebrow reveal">for my miss</p>
+      <h1 class="title reveal">
+        <span class="title-line">Два дня</span>
+        <span class="title-line title-accent">в глэмпинге</span>
+      </h1>
+      <p class="subtitle reveal">
+        Сентябрь, природа, костёр и всё то,<br>
+        о чём мы давно говорили — но так и не сделали.
+      </p>
+
+      <div class="countdown reveal" id="countdown">
+        <p class="countdown-label">до сентября осталось</p>
+        <div class="countdown-grid">
+          <div class="countdown-item">
+            <span class="countdown-num" id="cdDays">—</span>
+            <span class="countdown-unit">дней</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-num" id="cdHours">—</span>
+            <span class="countdown-unit">часов</span>
+          </div>
+          <div class="countdown-item">
+            <span class="countdown-num" id="cdMins">—</span>
+            <span class="countdown-unit">минут</span>
+          </div>
+        </div>
+        <p class="countdown-note">точные даты появятся позже · XX – XX</p>
+      </div>
+
+      <a href="#details" class="scroll-hint reveal" aria-label="Подробнее">
+        <span>узнать детали</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+      </a>
+    </section>
+
+    <section class="details" id="details">
+      <div class="section-label reveal">когда и где</div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card-icon">📅</div>
+          <h2>Когда</h2>
+          <p class="card-value">Сентябрь</p>
+          <p class="card-note card-placeholder">XX – XX</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-icon">⛺</div>
+          <h2>Формат</h2>
+          <p class="card-value">2 дня</p>
+          <p class="card-note">Глэмпинг на природе</p>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-icon">🌲</div>
+          <h2>Где</h2>
+          <p class="card-value">Загород</p>
+          <p class="card-note">Точное место — скоро</p>
+        </article>
+      </div>
+
+      <div class="activities reveal">
+        <h3>Что нас ждёт</h3>
+        <p class="activities-sub">Даты уточним, а вот план — уже есть</p>
+
+        <div class="activity-grid">
+          <div class="activity"><span class="activity-icon">🍽</span><span class="activity-name">Ресторан</span></div>
+          <div class="activity"><span class="activity-icon">💨</span><span class="activity-name">Кальян</span></div>
+          <div class="activity"><span class="activity-icon">🔥</span><span class="activity-name">Вечер у костра</span></div>
+          <div class="activity"><span class="activity-icon">🥾</span><span class="activity-name">Экотропы</span></div>
+          <div class="activity"><span class="activity-icon">🌿</span><span class="activity-name">Единение с природой</span></div>
+          <div class="activity"><span class="activity-icon">🧀</span><span class="activity-name">Сыроварня</span></div>
+          <div class="activity"><span class="activity-icon">🚲</span><span class="activity-name">Прокат великов</span></div>
+          <div class="activity"><span class="activity-icon">🐐</span><span class="activity-name">Зоопитомник</span></div>
+          <div class="activity"><span class="activity-icon">🎣</span><span class="activity-name">Рыбалка</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="program" id="program">
+      <div class="section-label reveal">программа</div>
+      <h3 class="program-title reveal">Два дня — без расписания по минутам</h3>
+
+      <div class="accordion reveal">
+        <details class="accordion-item" open>
+          <summary>
+            <span class="accordion-day">День 1</span>
+            <span class="accordion-theme">Заезд · велики · костёр</span>
+          </summary>
+          <ol class="day-plan">
+            <li><span class="day-time">Утро</span><span>Заезд, заселение, осмотр территории — никуда не бежим</span></li>
+            <li><span class="day-time">День</span><span>Прокат великов, зоопитомник, сыроварня</span></li>
+            <li><span class="day-time">Вечер</span><span>Ресторан, кальян и первый вечер у костра</span></li>
+          </ol>
+        </details>
+
+        <details class="accordion-item">
+          <summary>
+            <span class="accordion-day">День 2</span>
+            <span class="accordion-theme">Природа · рыбалка · домой</span>
+          </summary>
+          <ol class="day-plan">
+            <li><span class="day-time">Утро</span><span>Экотропы, прогулка, единение с природой</span></li>
+            <li><span class="day-time">День</span><span>Рыбалка, свободное время — как захочется</span></li>
+            <li><span class="day-time">Вечер</span><span>Последний костёр и дорога домой</span></li>
+          </ol>
+        </details>
+      </div>
+    </section>
+
+    <section class="dress" id="dress">
+      <div class="section-label reveal">от меня</div>
+      <div class="dress-box reveal">
+        <div class="dress-icon" aria-hidden="true">👗</div>
+        <h3>Платье — на мне</h3>
+        <p class="dress-text">
+          Тебе не нужно думать, во что идти.<br>
+          Я сам выберу платье для тебя. 
+        </p>
+        <p class="dress-note">Размер знаю. Стиль подберу.</p>
+      </div>
+    </section>
+
+    <section class="secret" id="secret">
+      <div class="section-label reveal">для тебя</div>
+      <div class="envelope-wrap reveal">
+        <button class="envelope" id="envelope" type="button" aria-label="Открыть послание">
+          <svg class="envelope-svg" viewBox="0 0 240 160" aria-hidden="true">
+            <defs>
+              <linearGradient id="envBody" x1="120" y1="58" x2="120" y2="152" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="rgba(100,55,70,0.22)"/>
+                <stop offset="45%" stop-color="rgba(180,110,130,0.16)"/>
+                <stop offset="100%" stop-color="rgba(232,160,180,0.34)"/>
+              </linearGradient>
+              <linearGradient id="envSide" x1="120" y1="58" x2="120" y2="144" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="rgba(70,38,50,0.32)"/>
+                <stop offset="100%" stop-color="rgba(150,85,105,0.14)"/>
+              </linearGradient>
+              <linearGradient id="envFlap" x1="120" y1="8" x2="120" y2="98" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="rgba(45,22,32,0.62)"/>
+                <stop offset="55%" stop-color="rgba(85,45,58,0.42)"/>
+                <stop offset="100%" stop-color="rgba(110,60,75,0.28)"/>
+              </linearGradient>
+            </defs>
+            <!-- body -->
+            <path class="envelope-back" fill="url(#envBody)" stroke="rgba(255,200,210,0.22)" stroke-width="1" stroke-linejoin="round"
+              d="M8 58 L120 98 L232 58 L232 144 Q232 152 224 152 L16 152 Q8 152 8 144 Z"/>
+            <!-- side folds -->
+            <path fill="url(#envSide)" stroke="none" d="M8 58 L8 144 L120 98 Z"/>
+            <path fill="url(#envSide)" stroke="none" d="M232 58 L232 144 L120 98 Z"/>
+            <!-- flap -->
+            <g class="envelope-flap-path">
+              <path fill="url(#envFlap)" stroke="rgba(255,200,210,0.22)" stroke-width="1" stroke-linejoin="round"
+                d="M8 8 H232 V58 L120 98 L8 58 Z"/>
+            </g>
+          </svg>
+          <div class="envelope-content">
+            <span class="envelope-hint">нажми, чтобы открыть</span>
+          </div>
+        </button>
+        <div class="secret-letter hidden" id="secretLetter">
+          <p class="secret-verse">
+            В старых историях иногда пишут про рыжую богиню — что она не сидит
+            где-то на небесах, а ходит по земле, между лесами и звёздами,
+            и ей не нужны ни трон, ни храм. Только моё лицо.
+          </p>
+          <p class="secret-verse secret-verse-closing">
+            Люблю тебя. Восседай с достоинством.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="message" id="message">
+      <blockquote class="quote reveal">
+        <p>
+          Ты вечно занята, это уже традиция. Давай на два дня сменим традицию —
+          глэмпинг, костёр, и чтобы никто никого не торопил.
+        </p>
+      </blockquote>
+    </section>
+
+    <section class="rsvp" id="rsvp">
+      <div class="rsvp-inner reveal">
+        <h2>Едешь со мной?</h2>
+        <p class="rsvp-sub">Даты скоро, а место уже выбрано</p>
+
+        <div class="rsvp-buttons">
+          <button class="btn btn-yes" id="btnYes" type="button">
+            <span>Конечно, еду!</span>
+          </button>
+          <button class="btn btn-maybe" id="btnMaybe" type="button">
+            <span>Может, в другой раз...</span>
+          </button>
+        </div>
+
+        <div class="rsvp-result hidden" id="rsvpResult" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Сделано с ❤️ · <span id="year"></span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
