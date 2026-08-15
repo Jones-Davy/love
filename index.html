@@ -4,7 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Глэмпинг — приглашение</title>
-  <meta name="description" content="Два дня в глэмпинге — только для тебя">
+  <meta name="description" content="Два дня в глэмпинге — природа, костёр и время только для нас">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Приглашение">
+  <meta property="og:title" content="Два дня в глэмпинге">
+  <meta property="og:description" content="Сентябрь, природа, костёр — хочу предложить тебе отдых на два дня.">
+  <meta property="og:url" content="https://jones-davy.github.io/love/">
+  <meta property="og:image" content="https://jones-davy.github.io/love/og-image.png">
+  <meta property="og:image:width" content="683">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="Setting the mood">
+
+  <!-- Twitter / Telegram -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Два дня в глэмпинге">
+  <meta name="twitter:description" content="Сентябрь, природа, костёр — хочу предложить тебе отдых на два дня.">
+  <meta name="twitter:image" content="https://jones-davy.github.io/love/og-image.png">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛺</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
@@ -228,7 +248,24 @@
         <div class="rsvp-result hidden" id="rsvpResult" role="status" aria-live="polite"></div>
       </div>
     </section>
+
+    <section class="easter" id="easter">
+      <button class="easter-trigger reveal" id="easterTrigger" type="button" aria-label="???">
+        <span class="easter-dot"></span>
+        <span class="easter-dot"></span>
+        <span class="easter-dot"></span>
+      </button>
+    </section>
   </main>
+
+  <div class="easter-modal hidden" id="easterModal" role="dialog" aria-modal="true" aria-labelledby="easterTitle">
+    <div class="easter-modal-backdrop" id="easterBackdrop"></div>
+    <div class="easter-modal-card">
+      <button class="easter-modal-close" id="easterClose" type="button" aria-label="Закрыть">×</button>
+      <img class="easter-img" src="boba.png" alt="Боба" width="600" height="800" loading="lazy">
+      <p class="easter-caption" id="easterTitle">внезапный боба</p>
+    </div>
+  </div>
 
   <footer class="footer">
     <p>Сделано с ❤️ · <span id="year"></span></p>

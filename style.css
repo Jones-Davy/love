@@ -779,6 +779,115 @@ section {
   opacity: 0.5;
 }
 
+/* Easter egg — Boba */
+.easter {
+  padding: 0 0 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.easter-trigger {
+  display: flex;
+  gap: 6px;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.35;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.easter-trigger:hover {
+  opacity: 0.75;
+  transform: scale(1.05);
+}
+
+.easter-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: easter-pulse 2s ease-in-out infinite;
+}
+
+.easter-dot:nth-child(2) { animation-delay: 0.2s; }
+.easter-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes easter-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.easter-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.easter-modal.hidden {
+  display: none;
+}
+
+.easter-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 3, 4, 0.85);
+  backdrop-filter: blur(8px);
+  animation: fade-in 0.3s ease;
+}
+
+.easter-modal-card {
+  position: relative;
+  max-width: 320px;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  animation: letter-in 0.45s var(--transition);
+  z-index: 1;
+}
+
+.easter-modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  z-index: 2;
+  background: rgba(15, 10, 12, 0.6);
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.easter-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.easter-caption {
+  padding: 1rem 1.25rem 1.25rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
 @media (max-width: 480px) {
   section { padding: 3.5rem 0; }
 

@@ -226,3 +226,29 @@ btnYes.addEventListener('click', (e) => {
 btnMaybe.addEventListener('click', () => {
   showResult('Ладно... Хотя стоп, что нахуй?');
 });
+
+// ── Easter egg: Boba ──
+const easterTrigger = document.getElementById('easterTrigger');
+const easterModal = document.getElementById('easterModal');
+const easterClose = document.getElementById('easterClose');
+const easterBackdrop = document.getElementById('easterBackdrop');
+
+function openEaster() {
+  easterModal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEaster() {
+  easterModal.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+easterTrigger.addEventListener('click', openEaster);
+easterClose.addEventListener('click', closeEaster);
+easterBackdrop.addEventListener('click', closeEaster);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !easterModal.classList.contains('hidden')) {
+    closeEaster();
+  }
+});
